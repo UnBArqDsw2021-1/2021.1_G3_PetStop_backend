@@ -7,9 +7,12 @@
   "license": "MIT",
   "scripts": {
     "test": "jest --passWithNoTests --watch",
+    "cov": "jest --passWithNoTests --coverage",
     "test:staged": "jest --passWithNoTests",
+    "lint": "eslint src/** --fix",
     "prepare": "husky install",
-    "staged": "lint-staged"
+    "staged": "lint-staged",
+    "sonar": "sonarqube-verify"
   },
   "devDependencies": {
     "@types/jest": "^27.0.1",
@@ -24,6 +27,7 @@
     "husky": "^7.0.2",
     "jest": "^27.1.1",
     "lint-staged": "^11.1.2",
+    "sonarqube-verify": "^1.0.2",
     "ts-jest": "^27.0.5",
     "ts-node": "^10.2.1",
     "typescript": "*"

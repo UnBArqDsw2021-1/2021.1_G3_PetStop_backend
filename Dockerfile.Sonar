@@ -1,0 +1,2 @@
+FROM sonarqube:latest
+RUN echo  "sonar.forceAuthentication=false" >> ./conf/sonar.properties
