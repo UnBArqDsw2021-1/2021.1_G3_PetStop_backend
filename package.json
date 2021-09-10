@@ -1,0 +1,13 @@
+{
+  "name": "petstop_backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:UnBArqDsw2021-1/2021.1_G3_PetStop_backend.git",
+  "author": "jschneiderm98 <julio_schneider@hotmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^16.9.1",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.2"
+  }
+}
