@@ -3,10 +3,10 @@ up-sonar:
 down-sonar:
 	docker-compose -f docker-compose.sonar.yml down
 run:
-	echo "Not implemented"
+	docker-compose up
 run-build:
-	echo "Not implemented"
+	docker-compose up --build
 build:
-	echo "Not implemented"
+	docker-compose build
 down:
-	echo "Not implemented"
+	docker-compose down
