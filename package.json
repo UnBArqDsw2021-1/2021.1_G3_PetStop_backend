@@ -6,10 +6,12 @@
   "author": "jschneiderm98 <julio_schneider@hotmail.com>",
   "license": "MIT",
   "scripts": {
+    "build": "tsc",
     "test": "jest --passWithNoTests --watch",
     "cov": "jest --passWithNoTests --coverage",
+    "postinstall": "node ./postinstall.js || yarn run build",
     "test:staged": "jest --passWithNoTests",
-    "lint": "eslint src/** --fix",
+    "lint": "eslint src/**/*.ts --fix",
     "prepare": "husky install",
     "staged": "lint-staged",
     "sonar": "sonarqube-verify"
@@ -31,5 +33,12 @@
     "ts-jest": "^27.0.5",
     "ts-node": "^10.2.1",
     "typescript": "*"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.13",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "knex": "^0.95.11"
   }
 }

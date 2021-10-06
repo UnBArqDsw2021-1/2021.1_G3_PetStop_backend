@@ -1,2 +1,6 @@
-// placeholder file to test jest
-export const somador = (a: number, b: number): number => a + b
+import app from './app'
+import dotenv from 'dotenv'
+
+dotenv.config()
+
+app.listen(process.env.PORT ?? 3333)
