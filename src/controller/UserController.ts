@@ -17,9 +17,10 @@ const UserController: Controller = {
         email,
         description
       })
-      view.Success({ message: 'teUser created!', object: {} })
+      view.Success({ message: 'User created!' })
     } catch (err) {
-      view.BadRequest({})
+      if (err?.detail.includes('Key (email)')) { return view.BadRequest({ message: 'Email already exists' }) }
+      return view.InternalServerError({})
     }
   }
 

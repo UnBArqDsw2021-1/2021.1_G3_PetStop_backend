@@ -1,6 +1,6 @@
 export interface restResponse {
   message?: String | undefined
-  object?: Record<string, any> | undefined
+  object?: Record<string, any>
 }
 
 interface IRest {

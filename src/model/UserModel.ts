@@ -8,6 +8,6 @@ export async function getUserByLogin (user: IUser): Promise<any[]> {
 
 export async function createUser (user: IUser): Promise<any[]> {
   user.createdAt = new Date()
-  const data = await Connection('User').insert(user)
+  const data = await Connection('user').insert(user)
   return data
 }
