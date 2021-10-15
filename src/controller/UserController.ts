@@ -1,12 +1,13 @@
 import bcrypt from 'bcrypt'
 import type { RequestHandler } from 'express'
-import { createUser, getUserByLogin } from '../model/UserModel'
+import { createUser, getUserByLogin, specializeUser } from '../model/UserModel'
 import generateToken from '../model/utils/generateToken'
 import View from '../view/ExpressRest'
 
 interface Controller {
   Create: RequestHandler
   Login: RequestHandler
+  Specialize: RequestHandler
 }
 
 const UserController: Controller = {
@@ -36,12 +37,33 @@ const UserController: Controller = {
       if (!user) throw new Error('Wrong email or password')
       if (!bcrypt.compareSync(req.body.password, user.password)) throw new Error('Wrong email or password')
 
-      const { password, ...safeUser } = user
+      const { password, volunteer, ...safeUser } = user
       const token = generateToken({ email: user.email })
-
-      view.Success({ message: 'Login succeeded', object: { ...safeUser, token } })
+      const result = volunteer ? { ...safeUser, volunteer, token } : { ...safeUser, token }
+      view.Success({
+        message: 'Login succeeded',
+        object: result
+      })
     } catch (err) {
       if (err.message === 'Wrong email or password') return view.Unauthorized({ message: err.message })
+      console.log(err)
+      return view.InternalServerError({})
+    }
+  },
+  async Specialize (req, res) {
+    const view = new View(res)
+    const { telephone, endereco, dtNascimento, userEmail } = req.body
+    try {
+      await specializeUser({
+        telephone,
+        endereco,
+        dtNascimento,
+        userEmail
+      })
+      view.Success({ message: 'User is now a volunteer!' })
+    } catch (err) {
+      if (err?.detail?.includes('Key (telephone)')) { return view.BadRequest({ message: 'Telephone already exists' }) }
+      if (err?.detail?.includes('Key ("userEmail")')) { return view.BadRequest({ message: 'This user was already specialized' }) }
       console.log(err)
       return view.InternalServerError({})
     }
