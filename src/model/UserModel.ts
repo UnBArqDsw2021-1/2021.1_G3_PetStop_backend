@@ -1,8 +1,8 @@
 import Connection from '../database/connection'
 import IUser from './interfaces/IUser'
 
-export async function getUserByLogin (user: IUser): Promise<any[]> {
-  const data = await Connection('user').where({ email: user.email, password: user.password })
+export async function getUserByLogin (email: string): Promise<any[]> {
+  const data = await Connection('user').where({ email })
   return data
 }
 
