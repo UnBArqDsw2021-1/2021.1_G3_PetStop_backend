@@ -24,7 +24,8 @@ const UserController: Controller = {
       })
       view.Success({ message: 'User created!' })
     } catch (err) {
-      if (err?.detail.includes('Key (email)')) { return view.BadRequest({ message: 'Email already exists' }) }
+      if (err?.detail?.includes('Key (email)')) { return view.BadRequest({ message: 'Email already exists' }) }
+      console.log(err)
       return view.InternalServerError({})
     }
   },
@@ -41,9 +42,9 @@ const UserController: Controller = {
       view.Success({ message: 'Login succeeded', object: { ...safeUser, token } })
     } catch (err) {
       if (err.message === 'Wrong email or password') return view.Unauthorized({ message: err.message })
+      console.log(err)
       return view.InternalServerError({})
     }
   }
-
 }
 export default UserController
